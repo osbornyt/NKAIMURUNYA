@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - Peter Adhiambo Otieno</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .student-image {
+            max-width: 350px;
+            max-height: 350px;
+            width: auto;
+            height: auto;
+            display: block;
+            margin-left: 70px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+    <div class="card mx-auto mt-4" style="max-width: 700px; border: none;">
+        <div class="card-body">
+            <h4 class="card-title text-center">Peter Adhiambo Otieno</h4>
+            <div class="text-center my-3">
+                <div class="image-container" style="width: 80%">
+                    <img src="images/peter.jpg" alt="Peter Adhiambo Otieno's Image" class="student-image">
+                </div>
+                <button style="width: 80%;" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Documents
+                </button>
+                <ul style="width: 70%;" class="dropdown-menu">
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="peter_page-0006.jpg">Academic Report</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="peter_page-0001.jpg,peter_page-0002.jpg,peter_page-0003.jpg,peter_page-0004.jpg,peter_page-0005.jpg">Application Form</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="peter_page-0007.jpg">Tuition History</a></li>
+                </ul>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <p>My name is Peter Adhiambo, and I am a Form Three student at Nkaimurunya Secondary School. I am a positive and cheerful person, always looking for the bright side of every situation. One of my greatest passions is reading detective fiction, as I love solving puzzles and uncovering hidden truths.<br><br>Academically, I have a strong love for the sciences—Physics, Chemistry, and Biology. Even though it is not required, I have chosen to take all three science subjects because I enjoy the challenge and the knowledge they offer. My favorite is Physics, as it allows me to understand and explain natural phenomena that many people might view as magic. The way physics aims to make the impossible understandable fascinates me. In addition to academics, I am committed to staying fit and nurturing my spiritual growth, which helps me stay focused and balanced.<br><br>In the future, I aspire to pursue a career in either Medicine or Engineering, as both fields would allow me to make a meaningful impact in people’s lives. My biggest dream is to attend Harvard University, and I am determined to work hard to make that dream a reality. I strongly believe in discipline, perseverance, and self-belief as the key ingredients to success.<br><br>I come from a family of six children. My youngest sibling and I live in Nairobi, while three of my siblings live with my grandmother in Siaya. I am the second-born, but unfortunately, my eldest sister was recently diagnosed with breast cancer and is currently undergoing treatment at Kenyatta Hospital. My father works as a boda boda (motorbike) rider, while my mother sells bajia (fried snacks) in town. With the high cost of medical bills and the responsibility of providing for a large family, my parents struggle to pay for my tuition.<br><br>Receiving this scholarship would be a huge relief for my family. It would allow my parents to focus on paying tuition for my siblings and covering my sister’s medical expenses, while also giving me the stability I need to focus on my studies. I am committed to working hard so that I can attend a world-class university like Harvard and, in the future, be in a position to give back and help others.<br></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Modal -->
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdfModalLabel">Document Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.open-pdf').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                let paths = this.getAttribute('data-pdf');
+                document.getElementById("pdfModalLabel").textContent = this.textContent;
+                const pathsarray = paths.split(",");
+                const modalBody = document.getElementById("modal-body");
+                modalBody.innerHTML = "";
+                pathsarray.forEach((path, index) => {
+                    const img = document.createElement("img");
+                    img.src = "documents/" + path;
+                    img.alt = "Document Image";
+                    img.style.width = "100%";
+                    img.style.marginBottom = "10px";
+                    modalBody.appendChild(img);
+                });
+                let pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+                pdfModal.show();
+            });
+        });
+    </script>
+</body>
+</html>

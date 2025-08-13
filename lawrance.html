@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - Laurence Obonyo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .student-image {
+            max-width: 350px;
+            max-height: 350px;
+            width: auto;
+            height: auto;
+            display: block;
+            margin-left: 70px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+    <div class="card mx-auto mt-4" style="max-width: 700px; border: none;">
+        <div class="card-body">
+            <h4 class="card-title text-center">Laurence Obonyo</h4>
+            <div class="text-center my-3">
+                <div class="image-container" style="width: 80%">
+                    <img src="images/lawrance.jpg" alt="Laurence Obonyo's Image" class="student-image">
+                </div>
+                <button style="width: 80%;" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Documents
+                </button>
+                <ul style="width: 70%;" class="dropdown-menu">
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="laurence_page-0006.jpg">Academic Report</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="laurence_page-0001.jpg,laurence_page-0002.jpg,laurence_page-0003.jpg,laurence_page-0004.jpg,laurence_page-0005.jpg">Application Form</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="laurence_page-0007.jpg">Tuition History</a></li>
+                </ul>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <p>My name is Laurance Obonyo, and I am 17 years old. I consider myself a jovial and lighthearted individual who enjoys comedy and making people smile. Academically, my favorite subjects are Chemistry and Mathematics. Chemistry fascinates me because of its real-world applications—from medicine to agriculture, it is a subject that directly impacts our daily lives. My ambition is to become a pharmacist, and I am determined to achieve an A- or higher in my KCSE examinations so that I can join Jomo Kenyatta University to pursue a degree in Medicine with a focus on Pharmacy. In the future, I hope to contribute to scientific advancements in agriculture by developing chemical solutions to enhance crop yields and improve food security.<br><br>Beyond academics, I am actively involved in school leadership as the Lab Prefect, where I am responsible for keeping the Chemistry laboratory clean, organized, and well-maintained to ensure a conducive learning environment for my fellow students.<br><br>I come from a large family of six children, and I am the second-born. My eldest brother is in college, while three of my younger siblings are in high school, living with my mother in Nyanza. My youngest sibling is still in primary school, and the two of us live with my father in Rongai. My father works as an unskilled laborer at a construction site, while my mother is currently unemployed. With only one source of income, providing for four high school students has been an immense financial strain on my family.<br><br>This scholarship would be a life-changing opportunity for me and my siblings. It would significantly ease the financial burden on my father, allowing him to continue supporting my younger siblings’ education. More importantly, it would give me the stability and peace of mind to fully dedicate myself to my studies without the constant worry of unpaid school fees.<br><br></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Modal -->
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdfModalLabel">Document Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Open PDF in modal
+        document.querySelectorAll('.open-pdf').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                let paths = this.getAttribute('data-pdf');
+                document.getElementById("pdfModalLabel").textContent = this.textContent;
+                const pathsarray = paths.split(",");
+                const modalBody = document.getElementById("modal-body");
+                modalBody.innerHTML = "";
+                pathsarray.forEach((path, index) => {
+                    const img = document.createElement("img");
+                    img.src = "documents/" + path;
+                    img.alt = "Document Image";
+                    img.style.width = "100%";
+                    img.style.marginBottom = "10px";
+                    modalBody.appendChild(img);
+                });
+                let pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+                pdfModal.show();
+            });
+        });
+    </script>
+</body>
+</html>

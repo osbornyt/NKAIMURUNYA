@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - Thomas Benedict Kyalo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .student-image {
+            max-width: 350px;
+            max-height: 350px;
+            width: auto;
+            height: auto;
+            display: block;
+            margin-left: 70px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+    <div class="card mx-auto mt-4" style="max-width: 700px; border: none;">
+        <div class="card-body">
+            <h4 class="card-title text-center">Thomas Benedict Kyalo</h4>
+            <div class="text-center my-3">
+                <div class="image-container" style="width: 80%">
+                    <img src="images/benedict.jpg" alt="Thomas Benedict Kyalo's Image" class="student-image">
+                </div>
+                <button style="width: 80%;" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Documents
+                </button>
+                <ul style="width: 70%;" class="dropdown-menu">
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="thomas_page-0006.jpg">Academic Report</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="thomas_page-0001.jpg,thomas_page-0002.jpg,thomas_page-0003.jpg,thomas_page-0004.jpg,thomas_page-0005.jpg">Application Form</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="thomas_page-0007.jpg">Tuition History</a></li>
+                </ul>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <p>My name is Thomas Benedict Kyalo, and I am 19 years old. I completed my primary education at Ongata Primary School, where I scored 355 marks out of 500 in my KCPE exams. I was honored to receive admission to Kianyaga Boarding High School, but due to financial constraints, my parents were unable to afford the school fees. As a result, I was enrolled at Nkaimurunya Day Secondary School, where I am currently studying.<br><br>Academically, my favorite subjects are Business and History, and I am deeply passionate about numbers and financial management. My dream is to become an Accountant, and after completing high school, I hope to join Mount Kenya University to pursue a Bachelor’s degree in Business Analytics and Data Analytics. Beyond academics, I am also involved in sports, particularly long jump, and I proudly represent my school as part of the athletics team.<br><br>I live with my single mother and three siblings. My mother was previously employed as a cleaner at a nearby private high school, but when she became pregnant, she had to stop working. Unfortunately, by the time she was ready to return, she had already been replaced. Currently, she works as a casual laborer, often taking up short-term construction jobs where she assists in carrying and moving materials under the direction of skilled workers. Since her income is inconsistent, it has been a struggle to keep up with our rent, school fees, and basic needs. As a result, there are times when I am forced to miss school while my mother looks for funds to pay my tuition.<br><br>Receiving this scholarship would mean the world to me and my family. It would ease the financial burden on my mother and allow me to focus fully on my studies without the constant worry of missing school due to unpaid fees. It would also serve as a great motivation for me to work even harder towards my academic and career goals. In the future, I aspire to be financially stable so that I can support my family, especially my younger siblings, by ensuring they have access to quality education.<br></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Modal -->
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdfModalLabel">Document Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.open-pdf').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                let paths = this.getAttribute('data-pdf');
+                document.getElementById("pdfModalLabel").textContent = this.textContent;
+                const pathsarray = paths.split(",");
+                const modalBody = document.getElementById("modal-body");
+                modalBody.innerHTML = "";
+                pathsarray.forEach((path, index) => {
+                    const img = document.createElement("img");
+                    img.src = "documents/" + path;
+                    img.alt = "Document Image";
+                    img.style.width = "100%";
+                    img.style.marginBottom = "10px";
+                    modalBody.appendChild(img);
+                });
+                let pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+                pdfModal.show();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - Purity Munyiva Kyalo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .student-image {
+            max-width: 350px;
+            max-height: 350px;
+            width: auto;
+            height: auto;
+            display: block;
+            margin-left: 70px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+    <div class="card mx-auto mt-4" style="max-width: 700px; border: none;">
+        <div class="card-body">
+            <h4 class="card-title text-center">Purity Munyiva Kyalo</h4>
+            <div class="text-center my-3">
+                <div class="image-container" style="width: 80%">
+                    <img src="images/purity.jpg" alt="Purity Munyiva Kyalo's Image" class="student-image">
+                </div>
+                <button style="width: 80%;" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Documents
+                </button>
+                <ul style="width: 70%;" class="dropdown-menu">
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="purity_page-0006.jpg">Academic Report</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="purity_page-0001.jpg,purity_page-0002.jpg,purity_page-0003.jpg,purity_page-0004.jpg,purity_page-0005.jpg">Application Form</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="purity_page-0007.jpg">Tuition History</a></li>
+                </ul>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <p>My name is Kyalo Purity Munyiwa, and I am a dedicated student with a passion for singing, dancing, and helping others. I love mentoring and encouraging my peers, and I consider myself a talkative and outgoing person who enjoys bringing people together.<br><br>My favorite subjects are Mathematics, Kiswahili, and Chemistry. Mathematics has been my passion since primary school, and I appreciate its importance as a core subject. In addition to my academics, I am actively involved in school leadership as the Deputy President of Academics and participate in 100m sprint races.<br><br>I come from a large family of six children, and I am the firstborn. My twin sibling also studies at Nkaimurunya, while the younger ones are still in primary school. My father works as a watchman, and my mother braids hair to support us. If I am able to pursue higher education, I will be the first in my family to go to university.<br><br>Receiving this scholarship would be life-changing, as it would allow me to focus on my education without the fear of being sent home due to school fees. It would also lessen the financial burden on my family and motivate me to help others in similar situations.<br><br>My dream is to study Mechanical Engineering at the University of Nairobi. I have always enjoyed fixing electronics at home, and I want to turn this passion into a career. Beyond my personal goals, I hope to make a difference in my hometown, Yata Plateau, which suffers from severe drought. In the future, I want to support irrigation projects to help improve access to water and create a better environment for my community.<br><br>Whenever I struggle with a subject, I push myself to improve. I believe in resilience and never backing down from challenges. This mindset is why I deserve this scholarship—I am capable, hardworking, and determined to succeed.<br><br>To other students facing financial struggles, my message is: No matter your background, never give up. Stand up and fight for your dreams. When you step into school, leave your struggles at the gate and focus on your future. You can achieve anything you set your mind to.<br></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Modal -->
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdfModalLabel">Document Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.open-pdf').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                let paths = this.getAttribute('data-pdf');
+                document.getElementById("pdfModalLabel").textContent = this.textContent;
+                const pathsarray = paths.split(",");
+                const modalBody = document.getElementById("modal-body");
+                modalBody.innerHTML = "";
+                pathsarray.forEach((path, index) => {
+                    const img = document.createElement("img");
+                    img.src = "documents/" + path;
+                    img.alt = "Document Image";
+                    img.style.width = "100%";
+                    img.style.marginBottom = "10px";
+                    modalBody.appendChild(img);
+                });
+                let pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+                pdfModal.show();
+            });
+        });
+    </script>
+</body>
+</html>

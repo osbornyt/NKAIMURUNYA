@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details - Ngadi Faith Andisa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        .student-image {
+            max-width: 350px;
+            max-height: 350px;
+            width: auto;
+            height: auto;
+            display: block;
+            margin-left: 70px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+
+    <div class="card mx-auto mt-4" style="max-width: 700px; border: none;">
+        <div class="card-body">
+            <h4 class="card-title text-center">Ngadi Faith Andisa</h4>
+            <div class="text-center my-3">
+                <div class="image-container" style="width: 80%">
+                    <img src="images/andisa.jpg" alt="Ngadi Faith Andisa's Image" class="student-image">
+                </div>
+                <button style="width: 80%;" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    Documents
+                </button>
+                <ul style="width: 70%;" class="dropdown-menu">
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="andisa_page-0006.jpg">Academic Report</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="andisa_page-0001.jpg,andisa_page-0002.jpg,andisa_page-0003.jpg,andisa_page-0004.jpg,andisa_page-0005.jpg">Application Form</a></li>
+                    <li><a class="dropdown-item open-pdf" href="#" data-pdf="andisa_page-0007.jpg">Tuition History</a></li>
+                </ul>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <p>My name is Ngadi Faith Andisa, and I am a determined and hardworking student with a passion for netball, cooking, and sewing. I enjoy using my hands creatively and take pride in learning new skills.<br><br>My favorite subjects are Biology, Home Science, and English. I love Biology because I understand it easily, and Home Science allows me to express my creativity through cooking and sewing. English helps me communicate effectively and express my thoughts clearly.<br><br>I have actively participated in extracurricular activities, representing Kajiado North in netball since Form One. I play as a GK and have grown to love the sport and the teamwork it fosters.<br><br>I come from a family of five, and I am the third-born. My father is not present, and my mother works as a casual laborer to support us. My older brothers do not have stable jobs, and my younger siblings are still in school. My mother struggles to pay my school fees, and I am often sent home, which affects my education.<br><br>Receiving this scholarship would be life-changing. It would improve my school attendance, help me focus on my academics—especially Mathematics—and reduce the financial burden on my mother. With this support, I will work even harder to pursue my dreams and support my family.<br><br>I aspire to become a lawyer because I believe in defending the less fortunate. Too often, people take advantage of those who are struggling, and I want to fight for justice in my community. I hope to study at Kenyatta University and use my education to make a difference.<br><br>In the future, my goal is to support my mother so she does not have to work so hard. She is my greatest inspiration, and I want to give back to her and to my community.<br><br>When I face academic challenges, I turn to my mother for encouragement—she is my everything. Even when I am sent home for school fees, I borrow books from neighbors and continue studying on my own. I never stop learning, no matter the circumstances.<br><br>To other students facing financial struggles, I want to say: Never stop believing in yourself. Even if you are sent home, keep studying. Your education is your future, and no challenge should take that away from you.<br></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Modal -->
+    <div class="modal fade" id="pdfModal" tabindex="-1" aria-labelledby="pdfModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pdfModalLabel">Document Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.open-pdf').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                let paths = this.getAttribute('data-pdf');
+                document.getElementById("pdfModalLabel").textContent = this.textContent;
+                const pathsarray = paths.split(",");
+                const modalBody = document.getElementById("modal-body");
+                modalBody.innerHTML = "";
+                pathsarray.forEach((path, index) => {
+                    const img = document.createElement("img");
+                    img.src = "documents/" + path;
+                    img.alt = "Document Image";
+                    img.style.width = "100%";
+                    img.style.marginBottom = "10px";
+                    modalBody.appendChild(img);
+                });
+                let pdfModal = new bootstrap.Modal(document.getElementById('pdfModal'));
+                pdfModal.show();
+            });
+        });
+    </script>
+</body>
+</html>
